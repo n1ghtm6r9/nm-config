@@ -1,1 +1,1 @@
-# config
+# nm-config
