@@ -14,4 +14,16 @@ export class TransportConfigDto {
     array: true,
   })
   services: TransportConfigServiceDto[];
+
+  @Field({
+    type: Number,
+    nullable: true,
+  })
+  keepaliveTimeMs?: number;
+
+  @Field({
+    type: Number,
+    nullable: true,
+  })
+  keepaliveTimeoutMs?: number;
 }
