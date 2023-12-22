@@ -1,10 +1,11 @@
 import { Field } from '@nmxjs/validation';
 
-export class GrpcConfigServiceDto {
+export class TransportConfigServiceDto {
   @Field({
     type: String,
+    nullable: true,
   })
-  name: string;
+  name?: string;
 
   @Field({
     type: Number,

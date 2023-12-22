@@ -1,4 +1,5 @@
 export * from './IConfig';
-export * from './BrokerTransporterEnum';
+export * from './EventTypeEnum';
+export * from './TransporterEnumType';
 export * from './ConfigFileExtension';
 export * from './IConfigModuleOptions';

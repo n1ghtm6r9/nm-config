@@ -1,9 +1,11 @@
-import type { DbConfigDto, GrpcConfigDto, EtcdConfigDto } from '../dto';
+import type { DbConfigDto, TransportConfigDto, EventConfigDto, EtcdConfigDto, NotificationConfigDto } from '../dto';
 
 export interface IConfig {
   db?: DbConfigDto;
   cache?: DbConfigDto;
-  grpc?: GrpcConfigDto;
+  transport?: TransportConfigDto;
   etcd?: EtcdConfigDto;
+  event?: EventConfigDto;
+  notification?: NotificationConfigDto;
   [key: string]: Record<string, any>;
 }

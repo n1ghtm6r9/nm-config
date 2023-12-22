@@ -8,7 +8,7 @@ import { getEnvironment } from '@nmxjs/utils';
 import { configKey } from './constants';
 import { IConfigModuleOptions, IConfig, ConfigFileExtension } from './interfaces';
 import { InvalidConfigFileError } from './errors';
-import { DbConfigDto, GrpcConfigDto } from './dto';
+import { DbConfigDto, TransportConfigDto, EventConfigDto, EtcdConfigDto, NotificationConfigDto } from './dto';
 
 @Global()
 @Module({
@@ -25,7 +25,10 @@ export class ConfigModule {
     const defaultSchemas = {
       db: DbConfigDto,
       cache: DbConfigDto,
-      grpc: GrpcConfigDto,
+      transport: TransportConfigDto,
+      etcd: EtcdConfigDto,
+      event: EventConfigDto,
+      notification: NotificationConfigDto,
     };
     const schemas = {
       ...defaultSchemas,
