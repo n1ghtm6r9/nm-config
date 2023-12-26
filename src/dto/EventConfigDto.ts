@@ -14,4 +14,16 @@ export class EventConfigDto {
     array: true,
   })
   servers: EventConfigServerDto[];
+
+  @Field({
+    type: String,
+    nullable: true,
+  })
+  username?: string;
+
+  @Field({
+    type: String,
+    nullable: true,
+  })
+  password?: string;
 }

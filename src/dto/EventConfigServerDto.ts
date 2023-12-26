@@ -12,16 +12,4 @@ export class EventConfigServerDto {
     nullable: true,
   })
   port?: number;
-
-  @Field({
-    type: String,
-    nullable: true,
-  })
-  username?: string;
-
-  @Field({
-    type: String,
-    nullable: true,
-  })
-  password?: string;
 }
