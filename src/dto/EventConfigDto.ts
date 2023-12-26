@@ -1,5 +1,6 @@
 import { Field } from '@nmxjs/validation';
 import { EventTypeEnum } from '../interfaces';
+import { EventConfigServerDto } from './EventConfigServerDto';
 
 export class EventConfigDto {
   @Field({
@@ -9,20 +10,8 @@ export class EventConfigDto {
   type: EventTypeEnum;
 
   @Field({
-    type: String,
+    type: EventConfigServerDto,
     array: true,
   })
-  servers: string[];
-
-  @Field({
-    type: String,
-    nullable: true,
-  })
-  username?: string;
-
-  @Field({
-    type: String,
-    nullable: true,
-  })
-  password?: string;
+  servers: EventConfigServerDto[];
 }
