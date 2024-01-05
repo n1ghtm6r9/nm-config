@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/config",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,8 +26,12 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@nmxjs/types": "^1.0.7",
-    "@nmxjs/utils": "^1.0.6",
-    "class-transformer": "^0.5.1"
+    "@nmxjs/types": "^1.0.8",
+    "@nmxjs/utils": "^1.0.7",
+    "class-transformer": "^0.5.1",
+    "graphql-type-json": "^0.3.2"
+  },
+  "peerDependencies": {
+    "@nmxjs/validation": "^1.0.8"
   }
 }
