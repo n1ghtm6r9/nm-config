@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/config",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,8 +26,8 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@nmxjs/types": "^1.0.8",
-    "@nmxjs/utils": "^1.0.7",
+    "@nmxjs/types": "^1.0.9",
+    "@nmxjs/utils": "^1.0.10",
     "class-transformer": "^0.5.1",
     "graphql-type-json": "^0.3.2"
   },
