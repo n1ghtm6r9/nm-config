@@ -12,3 +12,8 @@ declare module '@nmxjs/validation' {
     validate(...params);
   }
 }
+
+declare module '@nmxjs/types' {
+  type ICallback = any;
+  type RecursivePartial<T> = any;
+}
