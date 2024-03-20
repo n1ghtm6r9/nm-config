@@ -4,7 +4,7 @@ import { ConfigFileExtension } from './ConfigFileExtension';
 
 export interface IConfigModuleOptions {
   folderPath?: string;
-  schemas?: Record<string, ClassConstructor<any>>;
+  schemas?: Record<string, ClassConstructor<any> | true>;
   format?: ConfigFileExtension;
   notificationsConfig?: boolean;
   callback?: ICallback;

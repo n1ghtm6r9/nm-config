@@ -49,10 +49,13 @@ const buildProviders = ({ format = ConfigFileExtension.YAML, folderPath = path.r
               [fileName
                 .split('-')
                 .map((v, i) => (i === 0 ? v : `${v[0].toUpperCase()}${v.substring(1)}`))
-                .join('')]: validator.validate({
-                data,
-                classSchema: schema,
-              }),
+                .join('')]:
+                <unknown>schema === true
+                  ? data
+                  : validator.validate({
+                      data,
+                      classSchema: schema,
+                    }),
             };
           }),
         )
