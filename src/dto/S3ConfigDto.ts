@@ -20,4 +20,9 @@ export class S3ConfigDto {
     type: String,
   })
   bucket: string;
+
+  @Field({
+    type: Boolean,
+  })
+  forcePathStyle?: boolean;
 }
