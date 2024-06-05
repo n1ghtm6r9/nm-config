@@ -8,11 +8,12 @@ import { getEnvironment } from '@nmxjs/utils';
 import { configKey } from './constants';
 import { IConfigModuleOptions, IConfig, ConfigFileExtension } from './interfaces';
 import { InvalidConfigFileError } from './errors';
-import { DbConfigDto, TransportConfigDto, EventConfigDto, EtcdConfigDto, NotificationConfigDto } from './dto';
+import { DbConfigDto, TransportConfigDto, EventConfigDto, EtcdConfigDto, NotificationConfigDto, S3ConfigDto } from './dto';
 
 const buildProviders = ({ format = ConfigFileExtension.YAML, folderPath = path.resolve('config'), ...options }: IConfigModuleOptions = {}) => {
   const environment = getEnvironment();
   const defaultSchemas = {
+    s3: S3ConfigDto,
     db: DbConfigDto,
     cache: DbConfigDto,
     transport: TransportConfigDto,

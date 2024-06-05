@@ -1,6 +1,7 @@
-import type { DbConfigDto, TransportConfigDto, EventConfigDto, EtcdConfigDto, NotificationConfigDto } from '../dto';
+import type { DbConfigDto, TransportConfigDto, EventConfigDto, EtcdConfigDto, NotificationConfigDto, S3ConfigDto } from '../dto';
 
 export interface IConfig {
+  s3?: S3ConfigDto;
   db?: DbConfigDto;
   cache?: DbConfigDto;
   transport?: TransportConfigDto;

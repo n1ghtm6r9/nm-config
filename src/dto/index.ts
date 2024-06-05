@@ -1,3 +1,4 @@
+export * from './S3ConfigDto';
 export * from './DbConfigDto';
 export * from './EtcdConfigDto';
 export * from './EventConfigDto';
