@@ -1,80 +1,20 @@
-import * as YAML from 'yaml';
-import * as path from 'path';
-import * as fs from 'fs';
 import { DynamicModule, Module, Global } from '@nestjs/common';
 import { ValidationModule, validatorKey, IValidator } from '@nmxjs/validation';
 import type { RecursivePartial } from '@nmxjs/types';
-import { getEnvironment } from '@nmxjs/utils';
 import { configKey } from './constants';
-import { IConfigModuleOptions, IConfig, ConfigFileExtension } from './interfaces';
-import { InvalidConfigFileError } from './errors';
-import { DbConfigDto, TransportConfigDto, EventConfigDto, EtcdConfigDto, NotificationConfigDto, S3ConfigDto } from './dto';
+import { IConfigModuleOptions, IConfig } from './interfaces';
+import { getConfig } from './utils';
 
-const buildProviders = ({ format = ConfigFileExtension.YAML, folderPath = path.resolve('config'), ...options }: IConfigModuleOptions = {}) => {
-  const environment = getEnvironment();
-  const defaultSchemas = {
-    s3: S3ConfigDto,
-    db: DbConfigDto,
-    cache: DbConfigDto,
-    transport: TransportConfigDto,
-    etcd: EtcdConfigDto,
-    event: EventConfigDto,
-    notification: NotificationConfigDto,
-  };
-  const schemas = {
-    ...defaultSchemas,
-    ...options.schemas,
-  };
-
+const buildProviders = (options: IConfigModuleOptions = {}) => {
   return [
     {
       provide: configKey,
       inject: [validatorKey],
-      useFactory: (validator: IValidator): Promise<IConfig> =>
-        Promise.all(
-          Object.entries(schemas).map(async ([fileName, schema]) => {
-            const fullPath = path.join(folderPath, fileName.indexOf('.') === -1 ? `${fileName}.${format.toLowerCase()}` : fileName);
-            const data = await fs.promises
-              .readFile(fullPath)
-              .then(buffer => (format === ConfigFileExtension.YAML ? YAML.parse(buffer.toString()) : buffer.toJSON()))
-              .then(configData => configData[environment] || configData['default'])
-              .catch(() => null);
-
-            if (!data && !defaultSchemas[fileName]) {
-              throw new InvalidConfigFileError(fileName);
-            } else if (!data) {
-              return;
-            }
-
-            return {
-              [fileName
-                .split('-')
-                .map((v, i) => (i === 0 ? v : `${v[0].toUpperCase()}${v.substring(1)}`))
-                .join('')]:
-                <unknown>schema === true
-                  ? data
-                  : validator.validate({
-                      data,
-                      classSchema: schema,
-                    }),
-            };
-          }),
-        )
-          .then(data =>
-            data.reduce(
-              (result, item) => ({
-                ...result,
-                ...item,
-              }),
-              {},
-            ),
-          )
-          .then(data => {
-            if (options.callback) {
-              options.callback(data);
-            }
-            return data;
-          }),
+      useFactory: (validator: IValidator) =>
+        getConfig({
+          ...options,
+          validator,
+        }),
     },
   ];
 };
