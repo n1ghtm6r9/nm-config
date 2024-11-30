@@ -1,7 +1,7 @@
 import * as YAML from 'yaml';
 import * as path from 'path';
 import * as fs from 'fs';
-import objHash from 'object-hash';
+import * as objHash from 'object-hash';
 import { getEnvironment } from '@nmxjs/utils';
 import { InvalidConfigFileError } from '../errors';
 import { IGetConfigOptions, IConfig, ConfigFileExtension } from '../interfaces';
@@ -52,6 +52,11 @@ export function getConfig({
   const data = Object.entries(schemas)
     .map(([fileName, schema]) => {
       const fullPath = path.join(folderPath, fileName.indexOf('.') === -1 ? `${fileName}.${format.toLowerCase()}` : fileName);
+
+      if (!fs.existsSync(fullPath)) {
+        return;
+      }
+
       const buffer = fs.readFileSync(fullPath);
       const configData = format === ConfigFileExtension.YAML ? YAML.parse(buffer.toString()) : buffer.toJSON();
       const data = configData[environment] || configData['default'];
