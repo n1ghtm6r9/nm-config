@@ -1,3 +1,9 @@
+declare module '@nestjs/common' {
+  type DynamicModule = any;
+  const Global = (): ClassDecorator => {};
+  const Module = (data): ClassDecorator => {};
+}
+
 declare module '@nmxjs/validation' {
   interface IFieldOptions {
     type: String | Number | Boolean | object;
